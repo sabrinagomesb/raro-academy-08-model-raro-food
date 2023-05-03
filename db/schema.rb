@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_02_201243) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_03_033321) do
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "public_place", null: false
@@ -91,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_201243) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["administrator_id"], name: "index_coupons_on_administrator_id"
+    t.index ["coupon_code"], name: "index_coupons_on_coupon_code", unique: true
   end
 
   create_table "customers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -122,6 +123,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_201243) do
     t.datetime "updated_at", null: false
     t.index ["dish_id"], name: "index_order_items_on_dish_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "order_payments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "payment_id", null: false
+    t.bigint "coupon_id", null: false
+    t.bigint "order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coupon_id"], name: "index_order_payments_on_coupon_id"
+    t.index ["customer_id"], name: "index_order_payments_on_customer_id"
+    t.index ["order_id"], name: "index_order_payments_on_order_id"
+    t.index ["payment_id"], name: "index_order_payments_on_payment_id"
   end
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -182,6 +196,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_201243) do
   add_foreign_key "dishes", "chefs"
   add_foreign_key "order_items", "dishes"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "order_payments", "coupons"
+  add_foreign_key "order_payments", "customers"
+  add_foreign_key "order_payments", "orders"
+  add_foreign_key "order_payments", "payments"
   add_foreign_key "orders", "addresses", column: "delivery_address_id"
   add_foreign_key "orders", "customers"
 end
