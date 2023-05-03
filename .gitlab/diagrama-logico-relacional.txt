@@ -1,0 +1,134 @@
+City
+-
+id PK int
+state_id FK >- State.id
+name string
+
+State
+-
+id PK int FK
+name string
+acronym string(2)
+
+Address
+-
+id PK int
+city_id int FK >- City.id
+name string
+public_place string
+number string(15)
+zip_code string(8)
+reference string
+complement string
+addressable_type int
+addressable_id int
+
+Telephone
+-
+id ind PK
+number string(11)
+contactable_type string
+contactable_id int
+
+User
+-
+id PK int
+name string
+cpf string(11) UNIQUE
+email string UNIQUE
+password string
+
+Administrator as Approver
+-
+id PK int
+user_id int FK - User.id
+
+Custumer
+-
+id PK int
+user_id int FK - User.id
+address_id int FK -< Address.id
+birthday date
+
+Chef
+-
+id PK int
+user_id int FK - User.id
+address_id int FK - Address.id
+approver_id int FK - Administrator.id
+
+CategoryDish
+-
+id PK int
+category_id int FK - Category.id
+dish_id int FK - Dish.id
+
+Category
+-
+id PK int
+name string
+
+Dish
+-
+id PK int
+chef_id int FK >- Chef.id
+name string
+description string
+available boolean
+active boolean
+unit_price decimal
+
+Order
+-
+id PK int
+custumer_id int FK >- Custumer.id
+delivery_address_id int FK - Address.id
+status enum
+total_price decimal
+delivery_price decimal
+
+OrderItems
+-
+id PK int
+dish_id int FK - Dish.id
+order_id int FK - Order.id
+amount int
+unit_price iint
+
+Payment
+-
+id int PK
+card_id int FK 0- Card.id
+amount_paid decimal
+status enum
+payment_method enum
+
+Card
+-
+id int PK
+custumer_id int FK >- Custumer.id
+number string(16)
+name string
+security_code string(3)
+type_card enum
+expiration_date date
+
+Coupon
+-
+id int PK
+custumer_id int FK >- Administrator.id
+coupon_code string UNIQUE
+name string
+description string
+date_start_validity date
+date_end_validity date
+total_discount decimal
+
+
+OrderPayment
+-
+id int PK
+order_id int FK - Order.id
+payment_id int FK - Payment.id
+custumer_id int FK - Custumer.id
+coupon_id int FK - Coupon.id
