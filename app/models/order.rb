@@ -1,11 +1,14 @@
 class Order < ApplicationRecord
   belongs_to :customer, dependent: :destroy
-  belongs_to :delivery_address, class_name: 'Address', foreign_key: 'delivery_address_id'
+  belongs_to :delivery_address, class_name: "Address", foreign_key: "delivery_address_id"
 
-  has_many :items, class_name: 'OrderItem', dependent: :destroy
+  has_many :items, class_name: "OrderItem", dependent: :destroy
   has_many :dishes, through: :items
 
   has_one :city, through: :delivery_address
+  has_one :order_payment
+  has_one :payment, through: :order_payment
+  has_one :coupon, through: :order_payment
 
   enum :status, {
     started: 1,
@@ -14,6 +17,6 @@ class Order < ApplicationRecord
     sent: 4,
     delivered: 5,
     finished: 6,
-    canceled: 7
+    canceled: 7,
   }, scopes: true, default: :started
 end

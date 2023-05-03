@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer: one
+  payment: one
+  coupon: one
+  order: one
+
+two:
+  customer: two
+  payment: two
+  coupon: two
+  order: two

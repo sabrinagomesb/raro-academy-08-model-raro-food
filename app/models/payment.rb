@@ -1,4 +1,9 @@
 class Payment < ApplicationRecord
+  has_one :order_payment
+  has_one :order, through: :order_payment
+  has_one :custumer, through: :order_payment
+  has_one :coupon, through: :order_payment
+
   enum :status, {
     pending: 1,
     processing: 2,
