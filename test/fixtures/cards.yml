@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer: one
+  number: MyString
+  name: MyString
+  security_code: MyString
+  type_card: MyString
+  expiration_date: 2023-05-02
+
+two:
+  customer: two
+  number: MyString
+  name: MyString
+  security_code: MyString
+  type_card: MyString
+  expiration_date: 2023-05-02
