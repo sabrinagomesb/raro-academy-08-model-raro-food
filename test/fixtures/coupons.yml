@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  administrator: one
+  coupon_code: MyString
+  name: MyString
+  description: MyString
+  date_start_validity: 2023-05-02
+  date_end_validity: 2023-05-02
+  total_discount: 9.99
+
+two:
+  administrator: two
+  coupon_code: MyString
+  name: MyString
+  description: MyString
+  date_start_validity: 2023-05-02
+  date_end_validity: 2023-05-02
+  total_discount: 9.99
