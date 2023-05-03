@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_03_033321) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_03_041933) do
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "public_place", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_033321) do
     t.string "number", limit: 16, null: false
     t.string "name", null: false
     t.string "security_code", limit: 3, null: false
-    t.string "type_card", null: false
+    t.integer "type_card", default: 1, null: false
     t.date "expiration_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
